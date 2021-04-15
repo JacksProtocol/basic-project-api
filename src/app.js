@@ -98,8 +98,27 @@ app.delete("/repositories/:id", (request, response) => {
   return response.status(204).send();
 });
 
+/*
+Endpoint to increment the number of likes of the repository.
+*/
 app.post("/repositories/:id/like", (request, response) => {
-  // TODO
+  const {id} = request.params;
+
+  //Check if the ID is valid. 
+  if(!isUuid(id)) return response.status(400).json({error: 'This is not a valid id.'});  
+
+  //Find the repository using the ID.
+  const repositoryIndex = repositories.findIndex(repository => repository.id === id);
+  
+  //If doesn't existe will send a error message.
+  if(repositoryIndex < 0) return response.status(400).json({error: "Repository doesn't exist."});
+
+  //Incrementing the number of likes.
+  repositories[repositoryIndex].like = repositories[repositoryIndex].like + 1;
+
+  let repository = repositories[repositoryIndex];
+
+  return response.status(200).json(repository);
 });
 
 module.exports = app;
