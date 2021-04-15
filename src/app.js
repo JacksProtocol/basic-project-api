@@ -116,6 +116,7 @@ app.post("/repositories/:id/like", (request, response) => {
   //Incrementing the number of likes.
   repositories[repositoryIndex].like = repositories[repositoryIndex].like + 1;
 
+  //Returning the repository.
   let repository = repositories[repositoryIndex];
 
   return response.status(200).json(repository);
