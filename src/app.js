@@ -42,7 +42,7 @@ app.post("/repositories", (request, response) => {
     title,
     url,
     techs, 
-    like: 0
+    likes: 0
   };
 
   //Adding the new repository in the array.
@@ -71,7 +71,7 @@ app.put("/repositories/:id", (request, response) => {
     title,
     url,
     techs,
-    like: repositories[repositoryIndex].like
+    likes: repositories[repositoryIndex].likes
   }
 
   //Updating the old repository. 
@@ -114,7 +114,7 @@ app.post("/repositories/:id/like", (request, response) => {
   if(repositoryIndex < 0) return response.status(400).json({error: "Repository doesn't exist."});
 
   //Incrementing the number of likes.
-  repositories[repositoryIndex].like = repositories[repositoryIndex].like + 1;
+  repositories[repositoryIndex].likes = repositories[repositoryIndex].likes + 1;
 
   //Returning the repository.
   let repository = repositories[repositoryIndex];
